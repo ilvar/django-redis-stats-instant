@@ -21,11 +21,13 @@ class CustomIndexDashboard(DefaultIndexDashboard):
     """
     def init_with_context(self, context):
         super(CustomIndexDashboard, self).init_with_context(context)
-        self.children.append(RedisStatsModule())```
+        self.children.append(RedisStatsModule())
+```
 4. Do not forget to add your custom dashboard to `settings`:
 ```
 ADMIN_TOOLS_INDEX_DASHBOARD = 'redis_dashboard.CustomIndexDashboard'
 ```
-5. That's it. With *django-admin-tools* you'll have a nice widget for the
-dashboard, for old-fashioned django admin there will be not so nice but
-still reliable another application section.
+5. That's it. With
+[django-admin-tools](https://bitbucket.org/izi/django-admin-tools/wiki/Home)
+you'll have a nice widget for the dashboard, for old-fashioned django
+admin there will be not so nice but still reliable fake application section.
