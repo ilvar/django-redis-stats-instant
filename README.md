@@ -3,7 +3,7 @@ This little application just shows current Redis stats on Django's admin dashboa
 Install
 =======
 
-1. Install with `pip install -e https+git://ilvar@github.com/ilvar/django-redis-stats-instant.git`
+1. Install with `pip install -e "git+https://ilvar@github.com/ilvar/django-redis-stats-instant.git#egg=django-redis-stats-instant"`
 2. Add `'redis_stats'` to `INSTALLED_APPS` in your `settings`
 3. If you're using [django-admin-tools](https://bitbucket.org/izi/django-admin-tools/wiki/Home)
     1. Just add Redis Stats module to your custom dashboard (or create a new one), as [provided in our example.](https://github.com/ilvar/django-redis-stats-instant/blob/master/example_project/redis_dashboard.py)
