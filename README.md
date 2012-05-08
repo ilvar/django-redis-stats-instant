@@ -7,9 +7,9 @@ Install
 1. Install with
 `pip install -e https+git://ilvar@github.com/ilvar/django-redis-stats-instant.git`
 2. Add `'redis_stats'` to `INSTALLED_APPS` in your `settings`
-3. If you're using
-[django-admin-tools](https://bitbucket.org/izi/django-admin-tools/wiki/Home)
-- just add Redis Stats module to your custom dashboard (or create a new one): ```python
+3. If you're using [django-admin-tools](https://bitbucket.org/izi/django-admin-tools/wiki/Home) -
+just add Redis Stats module to your custom dashboard (or create a new one):
+```python
 from admin_tools.dashboard.dashboards import DefaultIndexDashboard
 from redis_stats.admin_tools_redis import RedisStatsModule
 
