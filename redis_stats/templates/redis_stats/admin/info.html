@@ -1,0 +1,101 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static admin_list %}
+{% load admin_urls %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
+{% if cl.formset %}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+{% endif %}
+{% if cl.formset or action_form %}
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
+{% endif %}
+<style type="text/css">
+    div.cache_graph{
+        height: 1em;
+        width: 100%;
+        background-color: #BEEE37;
+        -webkit-box-shadow: 0.1em 0.1em 0.2em #aaa;
+        -moz-box-shadow: 0.1em 0.1em 0.2em #aaa;
+    }
+
+    div.cache_graph.inline{
+        display: inline-block;
+        width: 180px;
+        margin-left: 2em;
+    }
+
+    div.cache_graph_value{
+        height: 1em;
+        background-color: #E84A2F;
+    }
+</style>
+{{ media.css }}
+{% endblock %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="../../">{% trans 'Home' %}</a>
+    &rsaquo; {% trans 'Redis stats' %}
+</div>
+{% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    {% block object-tools %}
+    {% endblock %}
+    {% if cl.formset.errors %}
+    {% endif %}
+    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+        {% block search %}{% endblock %}
+        {% block date_hierarchy %}{% endblock %}
+
+        {% block filters %}
+        {% endblock %}
+
+        <h2>{% trans "Server load" %}</h2>
+        <h5>CPU {{ cpu_percent|floatformat:2 }}%</h5>
+        <div class="cache_graph">
+            <div class="cache_graph_value" style="width: {{ cpu_percent }}%"></div>
+        </div>
+        <h5>RAM {{ ram_percent|floatformat:2 }}%</h5>
+        <div class="cache_graph">
+            <div class="cache_graph_value" style="width: {{ ram_percent }}%"></div>
+        </div>
+        <br/>
+
+        <h2>{% trans "DB info" %}</h2>
+        <table>
+            {% for k,v in db_info %}
+            {% for k1, v1 in v.items %}
+            <tr>
+                {% ifchanged k %}<td rowspan="{{ v|length }}">{{ k }}</td>{% endifchanged %}
+                <td>{{ k1 }}</td>
+                <td>{{ v1 }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </table>
+        <br/>
+
+        <h2>{% trans "Server info" %}</h2>
+        <table>
+            {% for k,v in server_info %}
+            <tr>
+                <td>{{ k }}</td>
+                <td>{{ v }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

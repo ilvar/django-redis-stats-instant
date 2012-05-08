@@ -1,0 +1,43 @@
+{% if not module.is_empty %}
+<style type="text/css">
+    div.cache_graph{
+        height: 1em;
+        width: 100%;
+        background-color: #BEEE37;
+        -webkit-box-shadow: 0.1em 0.1em 0.2em #aaa;
+        -moz-box-shadow: 0.1em 0.1em 0.2em #aaa;
+    }
+
+    div.cache_graph.inline{
+        display: inline-block;
+        width: 180px;
+        margin-left: 2em;
+    }
+
+    div.cache_graph_value{
+        height: 1em;
+        background-color: #E84A2F;
+    }
+</style>
+<div{% if index %} id="module_{{ index }}{% if subindex %}_{{ subindex }}{% endif %}"{% endif %} class="{{ module.render_css_classes }}">
+{% if module.show_title %}<h2>{{ module.title }}</h2>{% endif %}
+<div class="dashboard-module-content">
+    {% spaceless %}
+    {% if module.pre_content %}
+    <p>{{ module.pre_content }}</p>
+    {% endif %}
+    {% block module_content %}
+    {% for child in module.children %}
+        <h5>{{ child.name }}</h5>
+        <div class="cache_graph">
+            <div class="cache_graph_value" style="width: {{ child.percent }}%"></div>
+        </div>
+    {% endfor %}
+    {% endblock %}
+    {% if module.post_content %}
+    <p>{{ module.post_content }}</p>
+    {% endif %}
+    {% endspaceless %}
+</div>
+</div>
+{% endif %}

@@ -1,0 +1,23 @@
+<style type="text/css">
+    div.cache_graph{
+        height: 1em;
+        width: 100%;
+        background-color: #BEEE37;
+        -webkit-box-shadow: 0.1em 0.1em 0.2em #aaa;
+        -moz-box-shadow: 0.1em 0.1em 0.2em #aaa;
+    }
+
+    div.cache_graph.inline{
+        display: inline-block;
+        width: 180px;
+        margin-left: 2em;
+    }
+
+    div.cache_graph_value{
+        height: 1em;
+        background-color: #E84A2F;
+    }
+</style>
+<div class="cache_graph">
+    <div class="cache_graph_value" style="width: {{ info.ram_percent }}%"></div>
+</div>
