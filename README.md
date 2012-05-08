@@ -9,11 +9,9 @@ Install
 2. Add `'redis_stats'` to `INSTALLED_APPS` in your `settings`
 3. If you're using
 [django-admin-tools](https://bitbucket.org/izi/django-admin-tools/wiki/Home)
-- just add Redis Stats module to your custom dashboard (or create a new one):
-```
+- just add Redis Stats module to your custom dashboard (or create a new one): ```python
 from admin_tools.dashboard.dashboards import DefaultIndexDashboard
 from redis_stats.admin_tools_redis import RedisStatsModule
-
 
 class CustomIndexDashboard(DefaultIndexDashboard):
     """
@@ -23,8 +21,7 @@ class CustomIndexDashboard(DefaultIndexDashboard):
         super(CustomIndexDashboard, self).init_with_context(context)
         self.children.append(RedisStatsModule())
 ```
-4. Do not forget to add your custom dashboard to `settings`:
-```
+4. Do not forget to add your custom dashboard to `settings`:```python
 ADMIN_TOOLS_INDEX_DASHBOARD = 'redis_dashboard.CustomIndexDashboard'
 ```
 5. That's it. With
