@@ -1,8 +1,10 @@
+{% load i18n %}
 {% if not module.is_empty %}
 <style type="text/css">
     div.cache_graph{
         height: 1em;
-        width: 100%;
+        width: 98%;
+        margin: 0 auto;
         background-color: #BEEE37;
         -webkit-box-shadow: 0.1em 0.1em 0.2em #aaa;
         -moz-box-shadow: 0.1em 0.1em 0.2em #aaa;
@@ -18,6 +20,11 @@
         height: 1em;
         background-color: #E84A2F;
     }
+
+    h5.graph {
+        width: 98%;
+        margin: 0 auto;
+    }
 </style>
 <div{% if index %} id="module_{{ index }}{% if subindex %}_{{ subindex }}{% endif %}"{% endif %} class="{{ module.render_css_classes }}">
 {% if module.show_title %}<h2>{{ module.title }}</h2>{% endif %}
@@ -28,11 +35,12 @@
     {% endif %}
     {% block module_content %}
     {% for child in module.children %}
-        <h5>{{ child.name }}</h5>
+        <h5 class="graph">{{ child.name }}</h5>
         <div class="cache_graph">
             <div class="cache_graph_value" style="width: {{ child.percent }}%"></div>
         </div>
     {% endfor %}
+    <p><a href="{% url admin:redis_stats_redisstats_changelist %}">{% trans "More stats" %}</a></p>
     {% endblock %}
     {% if module.post_content %}
     <p>{{ module.post_content }}</p>

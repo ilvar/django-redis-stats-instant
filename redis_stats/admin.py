@@ -13,14 +13,13 @@ class RedisStatsAdmin(admin.ModelAdmin):
         return render(request, 'redis_stats/admin/info.html', get_redis_stats())
 
     def get_model_perms(self, request):
-        return {'change': True, 'add': False}
+        return {'change': not 'admin_tools.dashboard' in settings.INSTALLED_APPS, 'add': False}
 
-if not 'admin_tools.dashboard' in settings.INSTALLED_APPS:
-    RedisStats._meta.abstract = False
+RedisStats._meta.abstract = False
 
-    info = get_redis_stats()
-    percentage = 'CPU: %.2f%% RAM: %.2f%%' % (info['cpu_percent'], info['ram_percent'])
-    RedisStats._meta.verbose_name_plural = _('Redis stats %s') % percentage
+info = get_redis_stats()
+percentage = 'CPU: %.2f%% RAM: %.2f%%' % (info['cpu_percent'], info['ram_percent'])
+RedisStats._meta.verbose_name_plural = _('Redis stats %s') % percentage
 
-    admin.site.register(RedisStats, RedisStatsAdmin)
+admin.site.register(RedisStats, RedisStatsAdmin)
 

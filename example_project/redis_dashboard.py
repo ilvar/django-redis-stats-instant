@@ -1,5 +1,3 @@
-from django.conf import settings
-
 from admin_tools.dashboard.dashboards import DefaultIndexDashboard
 from redis_stats.admin_tools_redis import RedisStatsModule
 
