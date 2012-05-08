@@ -14,7 +14,7 @@ setup(
     author_email='arcady.chumachenko@gmail.com',
     url = 'https://github.com/ilvar/django-redis-stats-instant',
     download_url='',
-    packages=find_packages(),
+    packages=['redis_stats', ],
     include_package_data=True,
     classifiers=[
         'Development Status :: 1 - Alpha',
