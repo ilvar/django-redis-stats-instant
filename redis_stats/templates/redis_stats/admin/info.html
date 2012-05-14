@@ -1,12 +1,9 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/change_list.html" %}
 {% load i18n %}
 
 {% block extrastyle %}
 {{ block.super }}
-{% if cl.formset or action_form %}
-{% url 'admin:jsi18n' as jsi18nurl %}
-<script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>
-{% endif %}
+
 <style type="text/css">
     div.cache_graph{
         height: 1em;
@@ -27,7 +24,6 @@
         background-color: #E84A2F;
     }
 </style>
-{{ media.css }}
 {% endblock %}
 
 {% block bodyclass %}change-list{% endblock %}

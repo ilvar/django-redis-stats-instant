@@ -47,12 +47,10 @@ def get_redis_stats():
     server_info = [(k,v) for k,v in full_info if not k.startswith('db')]
     db_info = [(k,v) for k,v in full_info if k.startswith('db')]
 
-    cpu_percent = full_info_dict.get('used_cpu_sys', 0)
+    cpu_percent = full_info_dict.get('used_cpu_sys', 0) / 100
 
     ram_size = MemoryCheck().value
     ram_percent = float(full_info_dict.get('used_memory_rss', 0)) / 1000000 / ram_size * 100
-
-    print ram_percent
 
     return {
         'server_info': server_info,
